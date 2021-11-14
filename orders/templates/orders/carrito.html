@@ -1,9 +1,43 @@
 {% extends "base.html" %}
-
-{% load bootstrap5 %}
-{% block head_css %}  {% endblock %}
 {% block tittle %} carrito {% endblock %}
 
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Pinocchios's w50 Pizza</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="navbar-brand">User:</a>
+                <a style="cursor: hand;" class="navbar-brand">Log out!</a>
+            </div>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+{% block subnavbar %}
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a style="cursor: hand;" href="/menu" class="nav-link active" aria-current="page">Our Menu</a>
+                <a style="cursor: hand;" href="/carrito" class="nav-link active" aria-current="page">Shopping Car</a>
+                <a style="cursor: hand;" href="/ordenes" class="nav-link active">Orders</a>
+            </div>
+        </div>
+    </div>
+</nav>
+{% endblock %}
 {% block main %}
-    <h1>Este men es el carrito</h1>
+    <div class="container">
+        <h4>Your Shopping Car</h4>
+        
+    </div>
 {% endblock %}
