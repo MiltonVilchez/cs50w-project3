@@ -13,3 +13,6 @@ def carrito(request):
     
 def ordenes(request):
     return render(request, 'orders/ordenes.html')
+
+def register(request):
+    return render(request, 'orders/register.html')
