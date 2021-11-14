@@ -20,6 +20,52 @@
 
 {% block main %}
 <div class="container">
-    <h1>Este men es el register</h1>
+    <div class="container overflow-hidden">
+        <div class="row gx-5">
+            <div class="col">
+                <div class="p-4 border bg-light">
+                    <img src="http://www.pinocchiospizza.net/images/building3.jpg" alt="Sitio.png">
+                </div>
+            </div>
+            <div class="col">
+                <div class="p-4 border bg-light">
+                    <h4>Register!</h4>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="First name"
+                            required>
+                        <label for="floatingInput">First name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="First name"
+                            required>
+                        <label for="floatingInput">First name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+                            required>
+                        <label for="floatingInput">Username</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                            required>
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    <button class="btn btn-primary">Let's go!</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock main %}
+
+{% block footer %}
+<nav class="navbar fixed-bottom navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand">© Todos los derechos reservados. Project 3 by Milton x Web50x.ni, 2021</a>
+        <a class="navbar-brand" href="https://www.facebook.com/milton.vilchezstockhausen/"><img height="24px" width="24px" src="https://cdn-icons-png.flaticon.com/512/174/174848.png" alt="Facebook.png"></a>
+        <a class="navbar-brand" href="https://www.instagram.com/miltonvilc"><img height="24px" width="24px" src="https://cdn-icons-png.flaticon.com/512/1409/1409946.png" alt="Instagram.png"></a>
+        <a class="navbar-brand" href="https://www.linkedin.com/in/milton-vílchez-183925157/"><img height="24px" width="24px" src="https://cdn-icons.flaticon.com/png/512/3536/premium/3536505.png?token=exp=1636912143~hmac=6137650ff44482d974efe1feda1cba8e" alt="LinkedIn.png"></a>
+        <a class="navbar-brand" href="https://github.com/MiltonVilchez"><img height="24px" width="24px" src="https://cdn-icons-png.flaticon.com/512/25/25657.png" alt="GitHub.png"></a>
+    </div>
+</nav>
+{% endblock %}
