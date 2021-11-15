@@ -55,12 +55,13 @@ class SpecialSicilianPizza(models.Model):
     #toppings = models.ManyToManyField(Toppings)
 
 class Carrito(models.Model):
+    status = models.BooleanField(default=False)
     items = models.CharField(max_length=200, blank=True)
     price_items = models.DecimalField(max_digits=6, decimal_places=2, blank=True)
     fecha_items = models.DateField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Orders(models.Model):
-    status = models.BooleanField()
+    status = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     carrito = models.ForeignKey(Carrito, on_delete=models.PROTECT)

@@ -1,9 +1,52 @@
 {% extends "base.html" %}
-
-{% load bootstrap5 %}
-{% block head_css %}  {% endblock %}
 {% block tittle %} ordenes {% endblock %}
-
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand">Pinocchios's w50 Pizza</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        {% if user.is_authenticated %}
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="navbar-brand">User: {{ user.username }}</a>
+                <a style="cursor: hand;" class="navbar-brand">Log out!</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</nav>
+{% endblock %}
+{% block subnavbar %}
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a style="cursor: hand;" href="/menu" class="nav-link active" aria-current="page">Our Menu</a>
+            </div>
+        </div>
+    </div>
+</nav>
+{% endblock %}
 {% block main %}
-    <h1>Este men es el ordenes</h1>
+<div class="container">
+    <h3>Ordenes pendientes:</h3>
+    <div class="p-4 border bg-light">
+        <div class="row g-0">
+            <div class="col-sm-6 col-md-12">Aqui van los items pendientes al carrito</div>
+        </div>
+    </div>
+    <h3>Ordenes pasadas:</h3>
+    <div class="p-4 border bg-light">
+        <div class="row g-0">
+            <div class="col-sm-6 col-md-12">Aqui van los items pasados al carrito</div>
+        </div>
+    </div>
+</div>
 {% endblock %}
