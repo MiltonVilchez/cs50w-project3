@@ -6,6 +6,7 @@ def index(request):
     return render(request, 'orders/index.html')
 
 def menu(request):
+    
     return render(request, 'orders/menu.html')
 
 def carrito(request):
