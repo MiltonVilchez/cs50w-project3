@@ -57,6 +57,7 @@ class SpecialSicilianPizza(models.Model):
 class Carrito(models.Model):
     status = models.BooleanField(default=False)
     items = models.CharField(max_length=200, blank=True)
+    cantidad = models.IntegerField(default=0, blank=True)
     price_items = models.DecimalField(max_digits=6, decimal_places=2, blank=True)
     fecha_items = models.DateField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

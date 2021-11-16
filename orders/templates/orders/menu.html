@@ -2,10 +2,15 @@
 {% block tittle %} menu {% endblock %}
 {% load static %}
 
+{% block head_css %}
+<script src="{% static 'code/coding.js' %}"></script>
+{% endblock %}
+
 {% block navbar %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navmil">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="{% static 'icons/pizza.png' %}" alt="pizza.png"> Pinocchios's w50 Pizza</a>
+    <a class="navbar-brand" href="#"><img src="{% static 'icons/pizza.png' %}" alt="pizza.png"> Pinocchios's w50
+      Pizza</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -13,11 +18,11 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         {% if user.is_authenticated %}
-          <a class="navbar-brand">User: {{ user.username }}</a>
-          <a style="cursor: hand;" class="navbar-brand">Log out!</a>
+        <a class="navbar-brand">User: {{ user.username }}</a>
+        <a style="cursor: hand;" class="navbar-brand">Log out!</a>
         {% else %}
-          <a href="/" style="cursor: hand;" class="navbar-brand">Log in</a>
-          <a style="cursor: hand;" class="navbar-brand" href="/register">Register</a>
+        <a href="/" style="cursor: hand;" class="navbar-brand">Log in</a>
+        <a style="cursor: hand;" class="navbar-brand" href="/register">Register</a>
         {% endif %}
       </div>
     </div>
@@ -34,8 +39,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a style="cursor: hand;" href="/carrito" class="nav-link active" aria-current="page"><img src="{% static 'icons/carrito-de-compras.png' %}" alt="carrito.png"> Shopping car</a>
-        <a style="cursor: hand;" href="/ordenes" class="nav-link active"><img src="{% static 'icons/lista-de-verificacion.png' %}" alt="lista.png"> Orders</a>
+        <a style="cursor: hand;" href="/carrito" class="nav-link active" aria-current="page"><img
+            src="{% static 'icons/carrito-de-compras.png' %}" alt="carrito.png"> Shopping car</a>
+        <a style="cursor: hand;" href="/ordenes" class="nav-link active"><img
+            src="{% static 'icons/lista-de-verificacion.png' %}" alt="lista.png"> Orders</a>
       </div>
     </div>
   </div>
@@ -50,13 +57,12 @@
     <div class="col">
       <div class="p-3 border bg-light">
         <div class="card" style="width: 18rem;">
-          <img src="{% static 'images/regularPizza.jpg' %}"
-            class="card-img-top" alt="RegularPizza.png">
+          <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="RegularPizza.png">
           <div class="card-body">
             <h5 class="card-title">Regular Pizza</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
               content.</p>
-            <button class="btn btn-primary">Add to cart!</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add to cart!</button>
           </div>
         </div>
       </div>
@@ -65,8 +71,7 @@
     <div class="col">
       <div class="p-3 border bg-light">
         <div class="card" style="width: 18rem;">
-          <img src="{% static 'images/SicilianPizza.jpg' %}"
-            class="card-img-top" alt="SicilianPizza.png">
+          <img src="{% static 'images/SicilianPizza.jpg' %}" class="card-img-top" alt="SicilianPizza.png">
           <div class="card-body">
             <h5 class="card-title">Sicilian Pizza</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
@@ -80,13 +85,12 @@
     <div class="col">
       <div class="p-3 border bg-light">
         <div class="card" style="width: 18rem;">
-          <img src="{% static 'images/Subs.jpg' %}"
-            class="card-img-top" alt="Subs.png">
+          <img src="{% static 'images/Subs.jpg' %}" class="card-img-top" alt="Subs.png">
           <div class="card-body">
             <h5 class="card-title">Subs</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
               card's content.</p>
-            <button class="btn btn-primary">Add to cart!</button>
+            <button class="btn btn-primary">Choose</button>
           </div>
         </div>
       </div>
@@ -95,14 +99,12 @@
     <div class="col">
       <div class="p-3 border bg-light">
         <div class="card" style="width: 18rem;">
-          <img
-            src="{% static 'images/Pasta.jpg' %}"
-            class="card-img-top" alt="Pasta.png">
+          <img src="{% static 'images/Pasta.jpg' %}" class="card-img-top" alt="Pasta.png">
           <div class="card-body">
             <h5 class="card-title">Pasta</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
               card's content.</p>
-            <button class="btn btn-primary">Add to cart!</button>
+            <button class="btn btn-primary">Choose</button>
           </div>
         </div>
       </div>
@@ -111,14 +113,12 @@
     <div class="col">
       <div class="p-3 border bg-light">
         <div class="card" style="width: 18rem;">
-          <img
-            src="{% static 'images/Salads.jpg' %}"
-            class="card-img-top" alt="SicilianPizza.png">
+          <img src="{% static 'images/Salads.jpg' %}" class="card-img-top" alt="SicilianPizza.png">
           <div class="card-body">
             <h5 class="card-title">Salads</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
               card's content.</p>
-            <button class="btn btn-primary">Add to cart!</button>
+            <button class="btn btn-primary">Choose</button>
           </div>
         </div>
       </div>
@@ -127,14 +127,12 @@
     <div class="col">
       <div class="p-3 border bg-light">
         <div class="card" style="width: 18rem;">
-          <img
-            src="{% static 'images/DinnerPlates.jpg' %}"
-            class="card-img-top" alt="SicilianPizza.png">
+          <img src="{% static 'images/DinnerPlates.jpg' %}" class="card-img-top" alt="SicilianPizza.png">
           <div class="card-body">
             <h5 class="card-title">Dinner Platters</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
               card's content.</p>
-            <button class="btn btn-primary">Add to cart!</button>
+            <button class="btn btn-primary">Choose</button>
           </div>
         </div>
       </div>
@@ -143,9 +141,7 @@
     <div class="col">
       <div class="p-3 border bg-light">
         <div class="card" style="width: 18rem;">
-          <img
-            src="{% static 'images/SpecialRPizza.jpg' %}"
-            class="card-img-top" alt="SicilianPizza.png">
+          <img src="{% static 'images/SpecialRPizza.jpg' %}" class="card-img-top" alt="SicilianPizza.png">
           <div class="card-body">
             <h5 class="card-title">Special Regular Pizza </h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
@@ -159,9 +155,7 @@
     <div class="col">
       <div class="p-3 border bg-light">
         <div class="card" style="width: 18rem;">
-          <img
-            src="{% static 'images/SpecialSPizza.jpg' %}"
-            class="card-img-top" alt="SicilianPizza.png">
+          <img src="{% static 'images/SpecialSPizza.jpg' %}" class="card-img-top" alt="SicilianPizza.png">
           <div class="card-body">
             <h5 class="card-title">Special Sicilian Pizza</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
@@ -171,8 +165,24 @@
         </div>
       </div>
     </div>
-
   </div>
-
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Hola</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
