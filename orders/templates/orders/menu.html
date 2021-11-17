@@ -19,7 +19,7 @@
       <div class="navbar-nav">
         {% if user.is_authenticated %}
         <a class="navbar-brand">User: {{ user.username }}</a>
-        <a style="cursor: hand;" class="navbar-brand">Log out!</a>
+        <a href="/logout" style="cursor: hand;" class="navbar-brand">Log out!</a>
         {% else %}
         <a href="/" style="cursor: hand;" class="navbar-brand">Log in</a>
         <a style="cursor: hand;" class="navbar-brand" href="/register">Register</a>

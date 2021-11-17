@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
+
 # Create your views here.
 def index(request):
     if request.method == 'POST':
@@ -32,3 +33,7 @@ def ordenes(request):
 
 def register(request):
     return render(request, 'orders/register.html')
+
+def logget_out(request):
+    logout(request)
+    return HttpResponseRedirect('/')
