@@ -1,3 +1,4 @@
+from django import contrib
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
@@ -32,7 +33,32 @@ def ordenes(request):
     return render(request, 'orders/ordenes.html')
 
 def register(request):
-    return render(request, 'orders/register.html')
+
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/menu', request)
+
+    if request.method == "POST":
+        username = request.POST.get("username")
+        name = request.POST.get("Fname")
+        lastn = request.POST.get("Lname")
+        email = request.POST.get("email")
+        contra = request.POST.get("password")
+        ccontra = request.POST.get("cpassword")
+        if contra == ccontra:
+            User.objects.create(
+                username = username,
+                first_name = name,
+                last_name = lastn,
+                email = email,
+                password = contra,
+            )
+            messages.success(request, "User created successfully!")
+            return HttpResponseRedirect('/')
+        else:
+            messages.error(request, "Check your password. They aren't equals")
+            return render(request, 'orders/register.html')
+    else:
+        return render(request, 'orders/register.html')
 
 def logget_out(request):
     logout(request)
