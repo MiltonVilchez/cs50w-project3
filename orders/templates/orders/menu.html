@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block head_css %}
-<script src="{% static 'code/coding.js' %}"></script>
+
 {% endblock %}
 
 {% block navbar %}
@@ -62,7 +62,8 @@
             <h5 class="card-title">Regular Pizza</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
               content.</p>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add to cart!</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              data-whatever="Regular Pizza">Add to cart!</button>
           </div>
         </div>
       </div>
@@ -76,7 +77,8 @@
             <h5 class="card-title">Sicilian Pizza</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
               content.</p>
-            <button class="btn btn-primary">Add to cart!</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              data-whatever="Sicilian Pizza">Add to cart!</button>
           </div>
         </div>
       </div>
@@ -146,7 +148,8 @@
             <h5 class="card-title">Special Regular Pizza </h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
               card's content.</p>
-            <button class="btn btn-primary">Add to cart!</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              data-whatever="Special Regular Pizza">Add to cart!</button>
           </div>
         </div>
       </div>
@@ -160,29 +163,57 @@
             <h5 class="card-title">Special Sicilian Pizza</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
               card's content.</p>
-            <button class="btn btn-primary">Add to cart!</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              data-whatever="Special Sicilian Pizza">Add to cart!</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Body</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <label>Enter amount here: </label><input type="number" width="auto" min="1" max="15" name="PCantidad"
+            id="Pcantidad">
+          <br><label>Choose size: </label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="Radios" id="Radios1" value="Small" checked>
+            <label class="form-check-label" for="exampleRadios1">
+              Small
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="Radios" id="Radios2" value="Large">
+            <label class="form-check-label" for="exampleRadios2">
+              Large
+            </label>
+          </div>
+          <small>If you want, you can add 3 toppings:</small>
+          <!-- Aqui el for de los toppings -->
+          <p id="pbody">
+          <div class="form-check">            
+            {% for top in nameTop %}
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+              <label class="form-check-label" for="flexCheckChecked">
+                {{top}}
+              </label>
+            {% endfor %}            
+          </div>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-{% endblock %}
+  <script src="{% static 'code/coding.js' %}"></script>
+  {% endblock %}

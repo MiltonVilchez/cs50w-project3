@@ -1,9 +1,12 @@
+from typing import List
 from django import contrib
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
+
+from orders.models import Toppings
 
 # Create your views here.
 def index(request):
@@ -23,8 +26,15 @@ def index(request):
         return render(request, 'orders/index.html')    
 
 def menu(request):
-    
-    return render(request, 'orders/menu.html')
+    list = []
+    for e in Toppings.objects.all():
+        list.append(e.nombre_tooping)
+
+    context = {
+        'nameTop': list,
+    }
+    print(list)
+    return render(request, 'orders/menu.html', context)
 
 def carrito(request):
     return render(request, 'orders/carrito.html')

@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 class Toppings (models.Model):
     nombre_tooping = models.CharField(max_length=40, blank=True, unique=True)
 
+    def __str__(self):
+        return self.nombre_tooping
+
 class DinnerPlates (models.Model):
     name_dinner = models.CharField(max_length=40, blank=True)
     tamanio = models.CharField(max_length=10, blank=True)
