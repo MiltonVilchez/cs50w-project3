@@ -26,14 +26,9 @@ def index(request):
         return render(request, 'orders/index.html')    
 
 def menu(request):
-    list = []
-    for e in Toppings.objects.all():
-        list.append(e.nombre_tooping)
-
     context = {
-        'nameTop': list,
+        'Toppings':Toppings.objects.all(),
     }
-    print(list)
     return render(request, 'orders/menu.html', context)
 
 def carrito(request):

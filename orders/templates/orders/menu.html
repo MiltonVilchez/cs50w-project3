@@ -198,14 +198,14 @@
           <small>If you want, you can add 3 toppings:</small>
           <!-- Aqui el for de los toppings -->
           <p id="pbody">
-          <div class="form-check">            
-            {% for top in nameTop %}
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-              <label class="form-check-label" for="flexCheckChecked">
-                {{top}}
-              </label>
-            {% endfor %}            
-          </div>
+          {% for top in Toppings %}
+            <div class="form-check">                        
+                <input class="form-check-input" type="checkbox" value="{{top}}" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">
+                  {{top}}
+                </label>                      
+            </div>
+          {% endfor %}  
           </p>
         </div>
         <div class="modal-footer">
