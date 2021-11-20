@@ -29,6 +29,17 @@ def menu(request):
     context = {
         'Toppings':Toppings.objects.all(),
     }
+    if request.method == "POST":
+        print("POSTMethod")
+        Topp = []
+        name = request.POST.get("nametitle")
+        cantidad = request.POST.get("Cantidad")
+        tamanio = request.POST.get("Radios")
+        Topp = request.POST.getlist('Toppings')
+        print(f"{name}-{cantidad}-{tamanio}-{Topp}")
+    else:
+        print("GETMethod")
+
     return render(request, 'orders/menu.html', context)
 
 def carrito(request):

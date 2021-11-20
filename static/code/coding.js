@@ -3,7 +3,8 @@ modal.addEventListener('show.bs.modal', function (event) {
     var button = event.relatedTarget;
     var recipient = button.getAttribute('data-whatever');
     modal.querySelector(".modal-title").innerHTML = recipient;
-    modal.querySelector(".otherTitle").innerHTML = recipient;
+    modal.querySelector(".otherTitle").innerHTML = recipient + " - Chesse";
+    modal.querySelector(".valueTitle").value = recipient + " - Chesse";
 });
 
 function Desabilita(esto) {
