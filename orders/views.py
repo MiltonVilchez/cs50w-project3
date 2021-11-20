@@ -30,12 +30,12 @@ def menu(request):
         'Toppings':Toppings.objects.all(),
     }
     if request.method == "POST":
-        print("POSTMethod")
         Topp = []
         name = request.POST.get("nametitle")
         cantidad = request.POST.get("Cantidad")
         tamanio = request.POST.get("Radios")
         Topp = request.POST.getlist('Toppings')
+
         print(f"{name}-{cantidad}-{tamanio}-{Topp}")
     else:
         print("GETMethod")
@@ -75,6 +75,34 @@ def register(request):
             return render(request, 'orders/register.html')
     else:
         return render(request, 'orders/register.html')
+
+def subs(request):
+
+    if request.method == "POST":
+        print("POSTMethod")
+
+    return render(request, 'orders/subs.html')
+
+def pasta(request):
+    
+    if request.method == "POST":
+        print("POSTMethod")
+        
+    return render(request, 'orders/pasta.html')    
+
+def salads(request):
+    
+    if request.method == "POST":
+        print("POSTMethod")
+        
+    return render(request, 'orders/salads.html') 
+
+def dinners(request):
+    
+    if request.method == "POST":
+        print("POSTMethod")
+        
+    return render(request, 'orders/dinners.html') 
 
 def logget_out(request):
     logout(request)

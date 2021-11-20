@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block tittle %} Pastas {% endblock %}
+{% load static %}
+
+{% block head_css %}{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navmil">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="{% static 'icons/pizza.png' %}" alt="pizza.png"> Pinocchios's w50
+            Pizza</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                {% if user.is_authenticated %}
+                <a class="navbar-brand">User: {{ user.username }}</a>
+                <a href="/logout" style="cursor: hand;" class="navbar-brand">Log out!</a>
+                {% else %}
+                <a href="/" style="cursor: hand;" class="navbar-brand">Log in</a>
+                <a style="cursor: hand;" class="navbar-brand" href="/register">Register</a>
+                {% endif %}
+            </div>
+        </div>
+</nav>
+{% endblock %}
+
+{% block subnavbar %}
+{% if user.is_authenticated %}
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a style="cursor: hand;" href="/menu" class="nav-link active" aria-current="page"><img
+                        src="{% static 'icons/menu.png' %}" alt="menu.png"> Our Menu</a>
+                <a style="cursor: hand;" href="/carrito" class="nav-link active" aria-current="page"><img
+                        src="{% static 'icons/carrito-de-compras.png' %}" alt="carrito.png"> Shopping car</a>
+                <a style="cursor: hand;" href="/ordenes" class="nav-link active"><img
+                        src="{% static 'icons/lista-de-verificacion.png' %}" alt="lista.png"> Orders</a>
+            </div>
+        </div>
+    </div>
+</nav>
+{% endif %}
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Baked Ziti w/Mozzarella.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Baked Ziti w/Mozzarella</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Baked Ziti w/Mozzarella">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Baked Ziti w/Meatballs.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Baked Ziti w/Meatballs</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Baked Ziti w/Meatballs">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Baked Ziti w/Chicken.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Baked Ziti w/Chicken</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Baked Ziti w/Chicken">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL -->
+<form method="POST">
+    {% csrf_token %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">                    
+                    <input style="display: none;" name="nametitle" class="valueTitle" type="text" value="">
+                    <label>Quantity: </label><input type="number" value="1" width="auto" min="1" max="15"
+                        name="Cantidad" id="Pcantidad">                                             
+                    <div>
+                        <h5 style="text-align: right;">Subtotal: xxxx</h5>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add to cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="{% static 'code/coding.js' %}"></script>
+{% endblock %}

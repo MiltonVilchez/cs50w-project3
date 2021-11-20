@@ -1,0 +1,371 @@
+{% extends "base.html" %}
+{% block tittle %} Subs {% endblock %}
+{% load static %}
+
+{% block head_css %}{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navmil">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="{% static 'icons/pizza.png' %}" alt="pizza.png"> Pinocchios's w50
+            Pizza</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                {% if user.is_authenticated %}
+                <a class="navbar-brand">User: {{ user.username }}</a>
+                <a href="/logout" style="cursor: hand;" class="navbar-brand">Log out!</a>
+                {% else %}
+                <a href="/" style="cursor: hand;" class="navbar-brand">Log in</a>
+                <a style="cursor: hand;" class="navbar-brand" href="/register">Register</a>
+                {% endif %}
+            </div>
+        </div>
+</nav>
+{% endblock %}
+
+{% block subnavbar %}
+{% if user.is_authenticated %}
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a style="cursor: hand;" href="/menu" class="nav-link active" aria-current="page"><img
+                        src="{% static 'icons/menu.png' %}" alt="menu.png"> Our Menu</a>
+                <a style="cursor: hand;" href="/carrito" class="nav-link active" aria-current="page"><img
+                        src="{% static 'icons/carrito-de-compras.png' %}" alt="carrito.png"> Shopping car</a>
+                <a style="cursor: hand;" href="/ordenes" class="nav-link active"><img
+                        src="{% static 'icons/lista-de-verificacion.png' %}" alt="lista.png"> Orders</a>
+            </div>
+        </div>
+    </div>
+</nav>
+{% endif %}
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Cheese.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Cheese</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Cheese">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Italian.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Italian</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Italian">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Ham + Cheese.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Ham + Cheese</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Ham + Cheese">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Meatball.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Meatball</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Meatball">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Tuna.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Tuna</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Tuna">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Turkey.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Turkey</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Turkey">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Chicken Parmigiana.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Chicken Parmigiana</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Chicken Parmigiana">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top"
+                        alt="Eggplant Parmigiana.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Eggplant Parmigiana</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Eggplant Parmigiana">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Steak.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Steak</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Steak">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Steak + Cheese.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Steak + Cheese</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Steak + Cheese">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top"
+                        alt="Sausage, Peppers & Onions.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Sausage, Peppers & Onions</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Sausage, Peppers & Onions">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Hamburger.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Hamburger</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Hamburger">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Cheeseburger.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Cheeseburger</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Cheeseburger">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Fried Chicken.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Fried Chicken</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Fried Chicken">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/regularPizza.jpg' %}" class="card-img-top" alt="Veggie.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Veggie</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's
+                            content.</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-whatever="Veggie">Add to cart!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL -->
+<form method="POST">
+    {% csrf_token %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="otherTitle" id="exampleModalLabel">title</h6>
+                    <input style="display: none;" name="nametitle" class="valueTitle" type="text" value="">
+                    <label>Quantity: </label><input type="number" value="1" width="auto" min="1" max="15"
+                        name="Cantidad" id="Pcantidad">
+                    <br><label>Size: </label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Radios" id="Radios1" value="Small" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                            Small
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Radios" id="Radios2" value="Large">
+                        <label class="form-check-label" for="exampleRadios2">
+                            Large
+                        </label>
+                    </div>
+                    <!-- <small>If you want, you can add 3 toppings:</small> -->
+                    <!-- Aqui el for de los toppings -->
+                    <!-- <div style="column-count: 3; border:solid">
+                        <p id="pbody">
+                            {% for top in Toppings %}
+                        <div class="form-check">
+                            <input name="Toppings" class="form-check-input" type="checkbox" value="{{top}}"
+                                id="opciones" onchange="Desabilita(this)">
+                            <label class="form-check-label" for="flexCheckChecked">
+                                {{top}}
+                            </label>
+                        </div>
+                        {% endfor %}
+                        </p>
+                    </div> -->
+                    <div>
+                        <h5 style="text-align: right;">Subtotal: xxxx</h5>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add to cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="{% static 'code/coding.js' %}"></script>
+{% endblock %}

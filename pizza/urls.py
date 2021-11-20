@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from orders.views import index, menu, carrito, ordenes, register, logget_out
+from orders.views import dinners, index, menu, carrito, ordenes, register, logget_out,subs, pasta, salads
 
 urlpatterns = [
     #path("", include("orders.urls")),
@@ -26,5 +26,9 @@ urlpatterns = [
     path('carrito', carrito), 
     path('ordenes', ordenes), 
     path('register', register),
-    path('logout', logget_out)
+    path('logout', logget_out),
+    path('subs', subs),
+    path('pasta', pasta),
+    path('salads', salads),
+    path('dinners', dinners),
 ]
