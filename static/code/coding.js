@@ -2,7 +2,7 @@ var modal = document.getElementById("exampleModal");
 modal.addEventListener('show.bs.modal', function (event) {
     var button = event.relatedTarget;
     var recipient = button.getAttribute('data-whatever');
-    var type = button.getAttribute('data-type');
+    var type = button.getAttribute('data-bs-type');
     modal.querySelector(".modal-title").innerHTML = recipient;
     modal.querySelector(".otherTitle").innerHTML = recipient + " - Chesse";
     modal.querySelector(".valueTitle").value = recipient + " - Chesse";
