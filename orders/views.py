@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, NewType
 from django import contrib
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
 
-from orders.models import Toppings
+from orders.models import Carrito, Toppings, RegularPizza, SicilianPizza, SpecialRegularPizza, SpecialSicilianPizza
 
 # Create your views here.
 def index(request):
@@ -35,14 +35,60 @@ def menu(request):
         cantidad = request.POST.get("Cantidad")
         tamanio = request.POST.get("Radios")
         Topp = request.POST.getlist('Toppings')
-
-        print(f"{name}-{cantidad}-{tamanio}-{Topp}")
+        #variables para obtener el precio 
+        cant = len(Topp)
+        user = request.POST.get("nameuser")
+        iduser = User.objects.get(username=user)
+        id = iduser.username
+        items = f"{name}-{tamanio}; Toppings: {Topp}"
+        # iduser = User.objects.get(username=user)
+        if name == "Regular Pizza":
+            obj = RegularPizza.objects.get(tamanio=tamanio, quantity_top=cant)
+            price = float(cantidad) * obj.price_reg_pizza
+            Carrito.objects.create(
+                status = False,
+                items= items,
+                cantidad = cantidad,
+                price_items = price,
+                user = iduser,
+            )
+        if name == "Sicilian Pizza":
+            obj = SicilianPizza.objects.get(tamanio=tamanio, quantity_top=cant)
+            price = float(cantidad) * obj.price_sic_pizza
+            Carrito.objects.create(
+                status = False,
+                items= items,
+                cantidad = cantidad,
+                price_items = price,
+                user = iduser,
+            )
+        if name == "Special Regular Pizza":
+            obj = SpecialRegularPizza.objects.get(tamanio=tamanio)
+            price = float(cantidad) * obj.price_special_reg
+            Carrito.objects.create(
+                status = False,
+                items= items,
+                cantidad = cantidad,
+                price_items = price,
+                user = iduser,
+            )
+        if name == "Special Sicilian Pizza":
+            obj = SpecialSicilianPizza.objects.get(tamanio=tamanio)
+            price = float(cantidad) * obj.price_special_sic
+            Carrito.objects.create(
+                status = False,
+                items= items,
+                cantidad = cantidad,
+                price_items = price,
+                user = iduser,
+            )
     else:
         print("GETMethod")
 
     return render(request, 'orders/menu.html', context)
 
 def carrito(request):
+    
     return render(request, 'orders/carrito.html')
     
 def ordenes(request):

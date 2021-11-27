@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         {% if user.is_authenticated %}
-        <a class="navbar-brand">User: {{ user.username }}</a>
+        <a class="navbar-brand">User: {{ user.username }}</a>        
         <a href="/logout" style="cursor: hand;" class="navbar-brand">Log out!</a>
         {% else %}
         <a href="/" style="cursor: hand;" class="navbar-brand">Log in</a>
@@ -62,7 +62,7 @@
               card's
               content.</p>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-              data-whatever="Regular Pizza" data-bs-type="Regular">Add to cart!</button>
+              data-whatever="Regular Pizza" data-type="Regular">Add to cart!</button>
           </div>
         </div>
       </div>
@@ -78,7 +78,7 @@
               card's
               content.</p>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-              data-whatever="Sicilian Pizza" data-bs-type="Regular">Add to cart!</button>
+              data-whatever="Sicilian Pizza" data-type="Regular">Add to cart!</button>
           </div>
         </div>
       </div>
@@ -149,7 +149,7 @@
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
               card's content.</p>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-              data-whatever="Special Regular Pizza" data-bs-type="Special">Add to cart!</button>
+              data-whatever="Special Regular Pizza" data-type="Special">Add to cart!</button>
           </div>
         </div>
       </div>
@@ -164,7 +164,7 @@
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
               card's content.</p>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-              data-whatever="Special Sicilian Pizza" data-bs-type="Special">Add to cart!</button>
+              data-whatever="Special Sicilian Pizza" data-type="Special">Add to cart!</button>
           </div>
         </div>
       </div>
@@ -174,6 +174,7 @@
   <!-- Modal -->
   <form method="POST">
     {% csrf_token %}
+    <input type="text" name="nameuser" style="display: none;" value="{{ user.username }}">
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -199,7 +200,7 @@
                 Large
               </label>
             </div>
-            <small id="letters">If you want, you can add 3 toppings:</small>
+            <p id="letters"><small>If you want, you can add 3 toppings:</small></p>
             <!-- Aqui el for de los toppings -->
             <div style="column-count: 3; border:solid">
               <p id="pbody">
@@ -226,5 +227,5 @@
       </div>
     </div>
   </form>
-  <script src="{% static 'code/coding.js' %}"></script>
+  
   {% endblock %}
