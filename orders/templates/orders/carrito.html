@@ -44,17 +44,34 @@
 {% block main %}
 <div class="container">
     <h4>Your Shopping Car:</h4>
-    <div class="p-4 border bg-light">
-        <div class="row g-0">
-            <div class="col-sm-6 col-md-10">Aqui van los items añadidos al carrito <div>Precio: $$$</div>
-            </div>
-            <div class="col-6 col-md-2">
-                <button style="border: none; background:transparent;">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3096/3096673.png" width="26px" height="32px"
-                        alt="eliminar.png">
-                </button>
+    {% for item in items %}
+        <div style="margin-top:1rem;" class="p-4 border bg-light">
+            <div class="row g-0">
+                <div class="col-sm-6 col-md-10">
+                    <div>
+                        <p>Items: {{item.items}}</p>
+                        <p>Quantity: {{item.cantidad}}</p>                        
+                        <p>Fecha: {{item.fecha_items}}</p>                                           
+                    </div>                    
+                </div>
+                <div class="col-6 col-md-2">
+                    <button style="border: none; background:transparent; margin:2.5rem;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3096/3096673.png" width="26px" height="32px"
+                            alt="eliminar.png">
+                    </button>
+                </div>
+                <div style="justify-content: right;text-align:right">
+                    <p><strong>Sub-Total: </strong>{{item.price_items}}</p>
+                </div>
             </div>
         </div>
-    </div>
+    {% endfor %}
+    
+    <form method="POST">
+        {% csrf_token %}
+        <div style="justify-content: right;text-align:right; margin:2rem;">
+            <button type="submit" class="btn btn-primary">Buy</button>
+        </div>
+    </form>
 </div>
 {% endblock %}

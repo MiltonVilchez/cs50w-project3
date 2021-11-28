@@ -1,3 +1,13 @@
 .navmil{
     background: red;
 }
+
+.basura{
+    border: none;
+    background:transparent;
+    margin:2.5rem;
+}
+
+.basura:hover{
+    background: rgb(255, 64, 64);
+}

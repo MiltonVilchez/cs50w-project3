@@ -5,9 +5,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
-
 from orders.models import Carrito, Toppings, RegularPizza, SicilianPizza, SpecialRegularPizza, SpecialSicilianPizza
-
+from django.db.models import Q
 # Create your views here.
 def index(request):
     if request.method == 'POST':
@@ -16,6 +15,7 @@ def index(request):
         user = authenticate(username = username, password = password)
         if user is not None:
             login(request, user)
+            request.session['user'] = username
             return HttpResponseRedirect('/menu', request)
         else:
             messages.error(request, "Upss, We have an error. Please check if you entered the correct data")
@@ -39,7 +39,7 @@ def menu(request):
         cant = len(Topp)
         user = request.POST.get("nameuser")
         iduser = User.objects.get(username=user)
-        id = iduser.username
+        
         items = f"{name}-{tamanio}; Toppings: {Topp}"
         # iduser = User.objects.get(username=user)
         if name == "Regular Pizza":
@@ -52,6 +52,7 @@ def menu(request):
                 price_items = price,
                 user = iduser,
             )
+            messages.success(request, f"{items} successfully added!")
         if name == "Sicilian Pizza":
             obj = SicilianPizza.objects.get(tamanio=tamanio, quantity_top=cant)
             price = float(cantidad) * obj.price_sic_pizza
@@ -62,6 +63,7 @@ def menu(request):
                 price_items = price,
                 user = iduser,
             )
+            messages.success(request, f"{items} successfully added!")
         if name == "Special Regular Pizza":
             obj = SpecialRegularPizza.objects.get(tamanio=tamanio)
             price = float(cantidad) * obj.price_special_reg
@@ -72,6 +74,7 @@ def menu(request):
                 price_items = price,
                 user = iduser,
             )
+            messages.success(request, f"{items} successfully added!")
         if name == "Special Sicilian Pizza":
             obj = SpecialSicilianPizza.objects.get(tamanio=tamanio)
             price = float(cantidad) * obj.price_special_sic
@@ -82,14 +85,19 @@ def menu(request):
                 price_items = price,
                 user = iduser,
             )
-    else:
-        print("GETMethod")
+            messages.success(request, f"{items} successfully added!")
 
     return render(request, 'orders/menu.html', context)
 
 def carrito(request):
-    
-    return render(request, 'orders/carrito.html')
+    user = request.session['user']
+    iduser = User.objects.get(username=user)
+    car = Carrito.objects.filter(status=False, user=iduser.id).values()
+
+    context={
+        "items": car,
+    }
+    return render(request, 'orders/carrito.html', context)
     
 def ordenes(request):
     return render(request, 'orders/ordenes.html')
