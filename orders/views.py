@@ -1,9 +1,10 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, request
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
 from orders.models import Carrito, Pasta, Salads, Subs, Toppings, RegularPizza, DinnerPlates, SicilianPizza, SpecialRegularPizza, SpecialSicilianPizza
+
 # Create your views here.
 def index(request):
     if request.method == 'POST':
@@ -87,17 +88,30 @@ def menu(request):
     return render(request, 'orders/menu.html', context)
 
 def carrito(request):
-    user = request.session['user']
-    iduser = User.objects.get(username=user)
-    car = Carrito.objects.filter(status=False, user=iduser.id).values()
 
-    context={
-        "items": car,
-    }
-    return render(request, 'orders/carrito.html', context)
-    
+    if request.method == "POST":
+        print()
+
+    else:
+        user = request.session['user']
+        iduser = User.objects.get(username=user)
+        car = Carrito.objects.filter(status=False, user=iduser.id).values()
+
+        context={
+            "items": car,
+        }
+        return render(request, 'orders/carrito.html', context)
+
 def ordenes(request):
-    return render(request, 'orders/ordenes.html')
+    user = request.session['user']
+    carrito = []
+    iduser = User.objects.get(username=user)
+    carrito = Carrito.objects.filter(status=False, user=iduser.id).values()
+    context = {
+        "carritos":carrito,
+    }
+    print(carrito)
+    return render(request, 'orders/ordenes.html', context)
 
 def register(request):
 
@@ -218,8 +232,7 @@ def dinners(request):
     return render(request, 'orders/dinners.html') 
 
 def logget_out(request):
-    try:
-        del request.session['user']    
+    try:   
         logout(request)
         messages.success(request, "You're logged out!")
     except KeyError:
