@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
-from orders.models import Carrito, Pasta, Subs, Toppings, RegularPizza, SicilianPizza, SpecialRegularPizza, SpecialSicilianPizza
+from orders.models import Carrito, Pasta, Salads, Subs, Toppings, RegularPizza, SicilianPizza, SpecialRegularPizza, SpecialSicilianPizza
 from django.db.models import Q
 # Create your views here.
 def index(request):
@@ -140,7 +140,6 @@ def subs(request):
         user = request.POST.get("nameuser")
         iduser = User.objects.get(username=user)
 
-        print(f"Sub: {name}-{tamanio}-{cant}-{iduser}")
         obj = Subs.objects.get(name_subs=name, tamanio=tamanio)
         price = float(cant) * obj.price_subs
         Carrito.objects.create(
@@ -163,7 +162,6 @@ def pasta(request):
         user = request.POST.get("nameuser")
         iduser = User.objects.get(username=user)
 
-        print(f"Sub: {name}-{cant}-{iduser}")
         obj = Pasta.objects.get(name_pasta=name)
         price = float(cant) * obj.price_pasta
         Carrito.objects.create(
@@ -180,7 +178,22 @@ def pasta(request):
 def salads(request):
     
     if request.method == "POST":
-        print("POSTMethod")
+        cant = request.POST.get("Cantidad")
+        name = request.POST.get("nametitle")
+        items = f"{name}"
+        user = request.POST.get("nameuser")
+        iduser = User.objects.get(username=user)
+
+        obj = Salads.objects.get(name_salads=name)
+        price = float(cant) * obj.price_salads
+        Carrito.objects.create(
+                status = False,
+                items= items,
+                cantidad = cant,
+                price_items = price,
+                user = iduser,
+            )
+        messages.success(request, f"{items} successfully added!")
         
     return render(request, 'orders/salads.html') 
 

@@ -126,6 +126,7 @@
 <!-- MODAL -->
 <form method="POST">
     {% csrf_token %}
+    <input type="text" name="nameuser" style="display: none;" value="{{ user.username }}">
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
