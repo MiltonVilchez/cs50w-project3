@@ -4,7 +4,7 @@ modal.addEventListener('show.bs.modal', function (event) {
     var recipient = button.getAttribute('data-whatever');
     var type = button.getAttribute('data-type');
     modal.querySelector(".modal-title").innerHTML = recipient;
-    modal.querySelector(".otherTitle").innerHTML = recipient + " - Chesse";
+    console.log(recipient);
     modal.querySelector(".valueTitle").value = recipient;
     if (type == "Special"){
       const s = "If you want, you can add 6 toppings:";
