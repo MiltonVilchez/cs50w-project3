@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
-from orders.models import Carrito, Subs, Toppings, RegularPizza, SicilianPizza, SpecialRegularPizza, SpecialSicilianPizza
+from orders.models import Carrito, Pasta, Subs, Toppings, RegularPizza, SicilianPizza, SpecialRegularPizza, SpecialSicilianPizza
 from django.db.models import Q
 # Create your views here.
 def index(request):
@@ -156,8 +156,24 @@ def subs(request):
 
 def pasta(request):
     
-    if request.method == "POST":
-        print("POSTMethod")
+    if request.method == "POST":    
+        cant = request.POST.get("Cantidad")
+        name = request.POST.get("nametitle")
+        items = f"{name}"
+        user = request.POST.get("nameuser")
+        iduser = User.objects.get(username=user)
+
+        print(f"Sub: {name}-{cant}-{iduser}")
+        obj = Pasta.objects.get(name_pasta=name)
+        price = float(cant) * obj.price_pasta
+        Carrito.objects.create(
+                status = False,
+                items= items,
+                cantidad = cant,
+                price_items = price,
+                user = iduser,
+            )
+        messages.success(request, f"{items} successfully added!")
         
     return render(request, 'orders/pasta.html')    
 
