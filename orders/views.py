@@ -1,9 +1,10 @@
+from django.db.models.query import RawQuerySet
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect, request
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
-from orders.models import Carrito, Pasta, Salads, Subs, Toppings, RegularPizza, DinnerPlates, SicilianPizza, SpecialRegularPizza, SpecialSicilianPizza
+from orders.models import Carrito, Pasta,Orders, Salads, Subs, Toppings, RegularPizza, DinnerPlates, SicilianPizza, SpecialRegularPizza, SpecialSicilianPizza
 
 # Create your views here.
 def index(request):
@@ -88,29 +89,28 @@ def menu(request):
     return render(request, 'orders/menu.html', context)
 
 def carrito(request):
+    user = request.session['user']
+    iduser = User.objects.get(username=user)
+    car = Carrito.objects.filter(status=False, user=iduser.id).values()
 
     if request.method == "POST":
-        print()
-
-    else:
-        user = request.session['user']
-        iduser = User.objects.get(username=user)
-        car = Carrito.objects.filter(status=False, user=iduser.id).values()
-
-        context={
-            "items": car,
-        }
-        return render(request, 'orders/carrito.html', context)
+        Carrito.objects.filter(status=False, user=iduser).update(status=True)
+        messages.success(request, "Order confirmed!")
+        return HttpResponseRedirect('/ordenes', request)
+    context={
+        "items": car,
+    }
+    return render(request, 'orders/carrito.html', context)
 
 def ordenes(request):
     user = request.session['user']
     carrito = []
     iduser = User.objects.get(username=user)
-    carrito = Carrito.objects.filter(status=False, user=iduser.id).values()
+    carrito = Carrito.objects.filter(status=True, user=iduser.id).values()
+    print(carrito)
     context = {
         "carritos":carrito,
     }
-    print(carrito)
     return render(request, 'orders/ordenes.html', context)
 
 def register(request):

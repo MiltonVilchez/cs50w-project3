@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="navbar-brand">User: {{ user.username }}</a>
-                <a  href="/logout" style="cursor: hand;" class="navbar-brand">Log out!</a>
+                <a href="/logout" style="cursor: hand;" class="navbar-brand">Log out!</a>
             </div>
         </div>
         {% endif %}
@@ -42,14 +42,57 @@
     <h3>Ordenes pendientes:</h3>
     <div class="p-4 border bg-light">
         <div class="row g-0">
-            <div class="col-sm-6 col-md-12"></div>
+            <div class="col-sm-6 col-md-12">
+                {% if carritos %}
+                {% for it in carritos %}
+                <div class="row">
+                    <div class="col-8">
+                        <p>Order: {{it.items}} - {{it.cantidad}} -{{it.fecha_items}}</p>
+                    </div>
+                    <div class="col-2">
+                        <span><canvas id="myCanvas" width="10px" height="10px"
+                                style="border:1px solid black; background:red"></canvas></span>
+                    </div>
+                    {% if request.user.is_staff %}
+                    <div class="col-2">
+                        <input type="checkbox" name="Check" id="selection">
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                {% else %}
+                <div style="justify-content: center;text-align:center">
+                    <p>Your items will be displayed here, You don't have orders yet</p>
+                </div>
+                {% endif %}
+            </div>
         </div>
     </div>
     <h3>Ordenes pasadas:</h3>
     <div class="p-4 border bg-light">
         <div class="row g-0">
-            <div class="col-sm-6 col-md-12">Aqui van los items pasados al carrito</div>
+            <div class="col-sm-6 col-md-12">
+                {% if carrito %}
+                <div class="row">
+                    <div class="col-8">
+                        <p>Last order: {{it.items}} - {{it.cantidad}} -{{it.fecha_items}}</p>
+                    </div>                    
+                </div>
+                {% else %}
+                <div style="justify-content: center;text-align:center">
+                    <p>You have not made any order</p>
+                </div>
+                {% endif %}
+            </div>
         </div>
     </div>
+
 </div>
+<script>
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    ctx.arc(100, 75, 50, 0, 2 * Math.PI);
+    ctx.stroke();
+</script>
 {% endblock %}

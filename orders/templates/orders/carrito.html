@@ -61,17 +61,42 @@
                     </button>
                 </div>
                 <div style="justify-content: right;text-align:right">
-                    <p><strong>Sub-Total: </strong>{{item.price_items}}</p>
+                    <p id="subtotal"><strong>Sub-Total: </strong>{{item.price_items}}</p>
                 </div>
             </div>
         </div>
     {% endfor %}
+    {% if items %}
+    <div style="justify-content: right;text-align:right;margin:2rem;">
+        <button data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit" class="btn btn-primary">Buy</button>
+    </div>
+    {% else %}
+    <div style="justify-content: center;text-align:center">
+        <p>Your items will be displayed here, Add to cart!</p>
+    </div>
+    {% endif %}
     
-    <form method="POST">
-        {% csrf_token %}
-        <div style="display:flex;justify-content:right;text-align:right; margin:2rem;">
-           <h4 style="margin-right:3rem;" id="total">Total: </h4><button type="submit" class="btn btn-primary">Buy</button>
-        </div>
-    </form>
+</div>
+
+<!-- modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6 id="staticBackdropLabel">Confirm Order</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Establish order?</p>
+              </div>
+            <div class="modal-footer">
+                <form method="POST">{% csrf_token %}
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </form>
+            </div>
+        </div>  
+    </div>
 </div>
 {% endblock %}
