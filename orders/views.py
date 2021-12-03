@@ -1,4 +1,3 @@
-from django.db.models.query import RawQuerySet
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect, request
 from django.contrib.auth.models import User
@@ -9,11 +8,12 @@ from orders.models import Carrito, Pasta,Orders, Salads, Subs, Toppings, Regular
 # Create your views here.
 def index(request):
     if request.method == 'POST':
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        user = authenticate(username = username, password = password)
-        if user is not None:
-            login(request, user)
+        username = request.POST['username']
+        password = request.POST['password']
+        uer = authenticate(username=username, password=password)
+        print(f"{username}-{password}-{uer}")
+        if uer is not None:
+            login(request, uer, backend='django.contrib.auth.backends.ModelBackend')
             request.session['user'] = username
             return HttpResponseRedirect('/menu', request)
         else:
@@ -123,7 +123,6 @@ def ordenes(request):
     carrito = []
     iduser = User.objects.get(username=user)
     carrito = Carrito.objects.filter(status=True, user=iduser.id).values()
-    print(carrito)
     context = {
         "carritos":carrito,
     }
@@ -142,13 +141,14 @@ def register(request):
         contra = request.POST.get("password")
         ccontra = request.POST.get("cpassword")
         if contra == ccontra:
-            User.objects.create(
+            user = User.objects.create_user(
                 username = username,
                 first_name = name,
                 last_name = lastn,
                 email = email,
                 password = contra,
-            )
+            ) 
+            user.save();
             messages.success(request, "User created successfully!")
             return HttpResponseRedirect('/')
         else:

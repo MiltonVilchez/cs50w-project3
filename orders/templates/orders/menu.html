@@ -2,7 +2,9 @@
 {% block tittle %} menu {% endblock %}
 {% load static %}
 
-{% block head_css %}{% endblock %}
+{% block head_css %}
+
+{% endblock %}
 
 {% block navbar %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark navmil">
@@ -50,7 +52,7 @@
 
 {% block main %}
 <div class="container">
-  <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
+  <div style="margin-top:2rem;" class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
 
     <div class="col">
       <div class="p-3 border bg-light">
@@ -201,8 +203,8 @@
             </div>
             <p id="letters"><small>If you want, you can add 3 toppings:</small></p>
             <!-- Aqui el for de los toppings -->
-            <div style="column-count: 3; border:solid">
-              <p id="pbody">
+            <div style="column-count: 3;">
+              <p style="padding:0;" id="pbody">
                 {% for top in Toppings %}
               <div class="form-check">
                 <input name="Toppings" class="form-check-input" type="checkbox" value="{{top}}" id="opciones"
@@ -213,9 +215,6 @@
               </div>
               {% endfor %}
               </p>
-            </div>
-            <div>
-              <h5 style="text-align: right;">Subtotal: xxxx</h5>
             </div>
           </div>
           <div class="modal-footer">
