@@ -42,6 +42,10 @@ def menu(request):
         items = f"{name}-{tamanio}; Toppings: {Topp}"
         # iduser = User.objects.get(username=user)
         if name == "Regular Pizza":
+            if cant > 3:
+                messages.error(request, "You can only add 3 toppings :)")
+                return HttpResponseRedirect('/menu', context) 
+
             obj = RegularPizza.objects.get(tamanio=tamanio, quantity_top=cant)
             price = float(cantidad) * obj.price_reg_pizza
             Carrito.objects.create(
@@ -53,6 +57,10 @@ def menu(request):
             )
             messages.success(request, f"{items} successfully added!")
         if name == "Sicilian Pizza":
+            if cant > 3:
+                messages.error(request, "You can only add 3 toppings :)")
+                return HttpResponseRedirect('/menu', context) 
+
             obj = SicilianPizza.objects.get(tamanio=tamanio, quantity_top=cant)
             price = float(cantidad) * obj.price_sic_pizza
             Carrito.objects.create(
@@ -64,6 +72,10 @@ def menu(request):
             )
             messages.success(request, f"{items} successfully added!")
         if name == "Special Regular Pizza":
+            if cant > 6:
+                messages.error(request, "You can only add 6 toppings :)")
+                return HttpResponseRedirect('/menu', context) 
+
             obj = SpecialRegularPizza.objects.get(tamanio=tamanio)
             price = float(cantidad) * obj.price_special_reg
             Carrito.objects.create(
@@ -75,6 +87,10 @@ def menu(request):
             )
             messages.success(request, f"{items} successfully added!")
         if name == "Special Sicilian Pizza":
+            if cant > 6:
+                messages.error(request, "You can only add 6 toppings :)")
+                return HttpResponseRedirect('/menu', context) 
+                
             obj = SpecialSicilianPizza.objects.get(tamanio=tamanio)
             price = float(cantidad) * obj.price_special_sic
             Carrito.objects.create(
